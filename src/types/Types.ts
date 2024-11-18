@@ -8,18 +8,16 @@ export interface List {
 
 export interface Result {
   name: string;
-  url:  string;
 }
 
 // Specific
 
 export interface Pokemon {
-  height: string;
-  id: number;
+  height: number;
+  id?: number;
   name: string;
-  types: Type[];
   weight: number;
-  sprites: {
+  sprites?: {
     front_default: string;
   };
 }

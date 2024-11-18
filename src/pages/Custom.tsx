@@ -1,46 +1,45 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import { getPokemons } from "../services/api";
 import Header from "../components/Header";
 
-import { Result } from "../types/Types";
-import Row from "../components/Row";
+import { Pokemon } from "../types/Types";
+import CustomRow from "../components/CustomRow";
 
-function Home() {
-  const [results, setResults] = useState<Result[]>([]);
-  
+function Custom() {
+  const [results, setResults] = useState<Pokemon[]>([]);
+
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const name = searchParams.get('name') || "";
 
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
-  
+
   useEffect(() => {
-    getPokemons()
-      .then(response => response.json())
-      .then(data => {
-        const condition = (dt: Result) => dt.name.toLowerCase().includes(name.toLowerCase());
-        const filtered = data.results.filter(condition);
-        setResults(filtered)
-      })
+    const data = window.localStorage.getItem("customData") || "[]";
+    const parsedData = JSON.parse(data);
+    const condition = (dt: Pokemon) => dt.name.toLowerCase().includes(name.toLowerCase());
+    const filtered = parsedData.filter(condition);
+    setResults(filtered);
   }, []);
 
   const handleSearch = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
     if(!query) {
-      navigate(`/home`);
+      navigate(`/custom`);
     } else {
-      navigate(`/home?name=${query}`);
+      navigate(`/custom?name=${query}`);
     }
     navigate(0);
   };
-  
+
   const handleDelete = (name: string) => {
     const filteredResults = results.filter((result) => result.name !== name);
     setResults(filteredResults);
+
+    window.localStorage.setItem("customData", JSON.stringify(filteredResults));
   };
 
   return (
@@ -48,9 +47,12 @@ function Home() {
       <Header />
       <main className="flex flex-col justify-start items-center gap-2 min-h-screen">
 
-        <h1 className="text-3xl font-bold mb-4">Lista de Pokemons</h1>
+        <h1 className="text-3xl font-bold mb-4">Lista de Pokemons creados</h1>
 
-        <section className="flex flex-row justify-center items-center w-1/2">
+        <section className="flex flex-row justify-center items-center gap-2 w-1/2">
+          <Link className="rounded-2xl px-2 py-1 bg-[#777] dark:bg-[#555] hover:bg-[#555] dark:hover:bg-[#444]" to={"/editcreate"}>
+            Crear
+          </Link>
           <form className="flex gap-2" onSubmit={handleSearch}>
             <input className="rounded-2xl border border-[#333] px-2 py-1 outline-none bg-[#ddd] text-[#111]" type="text" onChange={(e) => {setQuery(e.target.value)}} onKeyDown={(e) => {
             if (e.key === 'Enter') {
@@ -65,13 +67,7 @@ function Home() {
           <thead>
             <tr className="[&>th]:w-[12rem] [&>th]:bg-[#222] [&>th]:p-4 [&>th]:text-white">
               <th>
-                Sprite
-              </th>
-              <th>
                 Nombre
-              </th>
-              <th>
-                Id
               </th>
               <th>
                 Altura
@@ -92,7 +88,7 @@ function Home() {
 
               return (
                 <tr key={value.name} className="h-[7rem]">
-                  <Row name={value.name} index={index} color={color} />
+                  <CustomRow poke={value} index={index} color={color} />
                   <td className={`text-center ${color}`}>
                     <div className="flex flex-row justify-center items-center gap-2">
                       <button className="rounded-lg px-2 py-1 text-white bg-[#777] dark:bg-[#666] hover:bg-[#555] dark:hover:bg-[#444]" onClick={() => handleDelete(value.name)}>Borrar</button>
@@ -104,10 +100,10 @@ function Home() {
           }
           </tbody>
         </table>
-        
+
       </main>
     </>
   )
 }
 
-export default Home
+export default Custom

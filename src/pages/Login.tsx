@@ -38,15 +38,16 @@ function Login() {
   return (
     <>
       <main className="flex flex-row justify-center items-center w-screen h-screen">
+
         <form className="flex flex-col justify-center items-center gap-2 w-[20rem] rounded-2xl border border-[#555] dark:border-[#777] p-6 shadow-lg bg-[#ddd] dark:bg-[#444] [&>label]:mr-auto [&>label]:font-semibold [&>input]:rounded-lg [&>input]:px-2 [&>input]:py-1 [&>input]:w-full [&>input]:outline-none dark:[&>input]:text-[#111]" onSubmit={handleLogin}>
-          <label htmlFor="username">Username</label>
-          <input id="username" type="text" required onChange={(e) => {setUsername(e.target.value)}} onKeyDown={(e) => {
+          <label htmlFor="username">Usuario</label>
+          <input id="username" type="text" minLength={3} required onChange={(e) => {setUsername(e.target.value)}} onKeyDown={(e) => {
             if (e.key === 'Enter') {
               handleLogin(e);
             }
           }} />
 
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">Contraseña</label>
           <input id="password" type="password" required onChange={(e) => {setPassword(e.target.value)}} onKeyDown={(e) => {
             if (e.key === 'Enter') {
               handleLogin(e);
@@ -55,8 +56,9 @@ function Login() {
 
           <p className="mt-2 text-sm text-[#ff6060]">{message}</p>
 
-          <button className="w-full rounded-2xl px-4 py-2 mt-3 font-semibold text-white bg-[#777] dark:bg-[#555] hover:bg-[#555] dark:hover:bg-[#333]" type="submit">Submit</button>
+          <button className="w-full rounded-2xl px-4 py-2 mt-3 font-semibold text-white bg-[#777] dark:bg-[#555] hover:bg-[#555] dark:hover:bg-[#333]" type="submit">Ingresar</button>
         </form>
+
       </main>
     </>
   )
