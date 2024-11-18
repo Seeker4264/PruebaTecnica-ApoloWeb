@@ -1,12 +1,12 @@
 
 export async function getPokemons() {
-  const results = await fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0");
+  const results = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151&offset=0");
 
   return results;
 };
 
-export async function getPokemonData(url: string) {
-  const result = await fetch(url);
+export async function getPokemonData(name: string) {
+  const result = await fetch(`https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`);
 
   return result;
 };

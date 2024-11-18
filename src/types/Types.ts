@@ -19,6 +19,9 @@ export interface Pokemon {
   name: string;
   types: Type[];
   weight: number;
+  sprites: {
+    front_default: string;
+  };
 }
 
 export interface Type {
