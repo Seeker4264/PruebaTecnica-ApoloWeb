@@ -21,6 +21,10 @@ function App() {
     window.localStorage.setItem("password", user.password);
   };
 
+  if(!window.localStorage.getItem("users")) {
+    window.localStorage.setItem("users", "[]");
+  };
+
   if(!window.localStorage.getItem("customData")) {
     window.localStorage.setItem("customData", "[]");
   };

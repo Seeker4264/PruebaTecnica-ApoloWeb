@@ -19,6 +19,7 @@ function Custom() {
   useEffect(() => {
     const data = window.localStorage.getItem("customData") || "[]";
     const parsedData = JSON.parse(data);
+    
     const condition = (dt: Pokemon) => dt.name.toLowerCase().includes(name.toLowerCase());
     const filtered = parsedData.filter(condition);
     setResults(filtered);
