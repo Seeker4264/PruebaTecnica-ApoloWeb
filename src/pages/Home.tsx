@@ -7,6 +7,13 @@ import Header from "../components/Header";
 import { Result } from "../types/Types";
 import Row from "../components/Row";
 
+/**
+ * Home page
+ * 
+ * Página principal
+ * @returns "Home" page / Página "Home"
+ */
+
 function Home() {
   const [results, setResults] = useState<Result[]>([]);
   
@@ -16,6 +23,12 @@ function Home() {
 
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
+
+  /**
+   * Fetch API and data state effect
+   * 
+   * Efecto para el fetch API y el estado de los datos
+   */
   
   useEffect(() => {
     getPokemons()
@@ -27,6 +40,12 @@ function Home() {
       })
   }, []);
 
+  /**
+   * Search bar function
+   * 
+   * Función de la barra de búsqueda
+   */
+
   const handleSearch = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
 
@@ -37,6 +56,13 @@ function Home() {
     }
     navigate(0);
   };
+
+  /**
+   * Data delete function
+   * 
+   * Función de borrado de dato
+   * @param name "Pokemon name" for the filter() condition / "Nombre del Pokemon" para la condición de filter()
+   */
   
   const handleDelete = (name: string) => {
     const filteredResults = results.filter((result) => result.name !== name);

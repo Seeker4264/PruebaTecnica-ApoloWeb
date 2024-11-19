@@ -5,13 +5,27 @@ import Header from "../components/Header";
 
 import { Pokemon } from "../types/Types";
 
-function EditCreate() {
+/**
+ * Create custom Pokemon page
+ * 
+ * Página para crear un Pokemon personalizado
+ * @returns "Create" page / Página "Create"
+ */
+
+function Create() {
   const [name, setName] = useState("");
   const [height, setHeight] = useState(0);
   const [weight, setWeight] = useState(0);
   const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
+
+  /**
+   * Custom data creation function
+   * 
+   * Función de creación de datos personalizados
+   * @param e form event / evento del formulario
+   */
 
   const handleCreate = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
@@ -77,4 +91,4 @@ function EditCreate() {
   )
 }
 
-export default EditCreate
+export default Create

@@ -3,15 +3,34 @@ import { useNavigate, Link } from "react-router-dom";
 
 import { UserContext } from "../services/context";
 
+/**
+ * Header/Navbar component
+ * 
+ * Componente de navegación/cabecera
+ * @returns "Header" component / Componente "Header"
+ */
+
 function Header() {
   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
+
+  /**
+   * Active session retrieval from localStorage
+   * 
+   * Obtención de sesión activa desde localStorage
+   */
 
   useEffect(() => {
     if(window.localStorage.getItem("username")?.length === 0) {
       return navigate("/");
     }
   }, [])
+
+  /**
+   * User logout function
+   * 
+   * Función de cierre de sesión del usuario
+   */
 
   const handleLogout = () => {
     window.localStorage.setItem("username", "");

@@ -2,15 +2,34 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../services/context";
 
+/**
+ * "User" interface to manage properties
+ * 
+ * Interfaz del "usuario" para manejar sus propiedades
+ */
+
 interface User {
   username: string;
   password: string;
 };
 
+/**
+ * Login and register page
+ * 
+ * Página de inicio de sesión y registro
+ * @returns "Login" page / Página "Login"
+ */
+
 function Login() {
   const [users, setUsers] = useState<User[]>([]);
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
+
+  /**
+   * Active session retrieval from localStorage
+   * 
+   * Obtención de sesión activa desde localStorage
+   */
 
   useEffect(() => {
     if(window.localStorage.getItem("username")?.length !== 0) {
@@ -29,6 +48,13 @@ function Login() {
   const [newPassword, setNewPassword] = useState("");
   const [message, setMessage] = useState("");
   const [newMessage, setNewMessage] = useState("");
+
+  /**
+   * User registration function
+   * 
+   * Función de registro de usuario
+   * @param e form event / evento del formulario
+   */
 
   const handleRegister = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
@@ -64,6 +90,13 @@ function Login() {
       navigate("/home");
     };
   };
+
+  /**
+   * User login function
+   * 
+   * Función de inicio de sesión del usuario
+   * @param e form event / evento del formulario
+   */
 
   const handleLogin = (e: { preventDefault: () => void; }) => {
     e.preventDefault();

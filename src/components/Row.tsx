@@ -4,14 +4,34 @@ import { getPokemonData } from "../services/api";
 
 import { Pokemon } from "../types/Types";
 
-type cardProps = {
+/**
+ * "Row" type
+ * 
+ * Tipo para "fila"
+ */
+
+type rowProps = {
   name: string;
   index: number;
   color: string;
 }
 
-function Row(props: cardProps) {
+/**
+ * "Row" component for table
+ * 
+ * Componente "fila" para tabla
+ * @param props Row props / Props de fila
+ * @returns "Row" component / Componente "Row"
+ */
+
+function Row(props: rowProps) {
   const [pokemon, setPokemon] = useState<Pokemon>();
+
+  /**
+   * API fetching and state effect
+   * 
+   * Efecto para el fetch API y el estado
+   */
   
   useEffect(() => {
     if(props.name) {
@@ -24,7 +44,10 @@ function Row(props: cardProps) {
   return (
     <>
       <td className={`${props.color}`}>
-        <img className="mx-auto" src={pokemon?.sprites.front_default} alt={pokemon?.name + "photo"} loading="lazy" />
+        {
+          pokemon?.sprites?.front_default &&
+          <img className="mx-auto" src={pokemon?.sprites.front_default} alt={pokemon?.name + "photo"} loading="lazy" />
+        }
       </td>
       <td className={`text-center font-semibold text-white ${props.color}`}>{pokemon?.name.toUpperCase() || "LOADING"}</td>
       <td className={`text-center font-semibold text-white ${props.color}`}>{pokemon?.id}</td>
