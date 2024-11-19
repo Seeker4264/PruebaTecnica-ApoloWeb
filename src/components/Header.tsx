@@ -51,7 +51,7 @@ function Header() {
         <Link className="font-semibold hover:text-neutral-400" to={"/custom"}>
           Lista Personalizada
         </Link>
-        <button className="rounded-lg px-2 py-1 text-white bg-[#777] dark:bg-[#555] hover:bg-[#555] dark:hover:bg-[#444]" onClick={handleLogout}>Logout</button>
+        <button className="rounded-lg px-2 py-1 text-white bg-[#777] dark:bg-[#555] hover:bg-[#555] dark:hover:bg-[#444]" onClick={handleLogout}>Cerrar Sesión</button>
     </header>
   )
 }

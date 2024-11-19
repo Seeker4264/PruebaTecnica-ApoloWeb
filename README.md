@@ -48,3 +48,4 @@ Prueba para evaluar habilidades como desarrollador Frontend trabajando con React
 3. **Fetch API**: Para realizar solicitudes HTTP a la API.
 4. **Tailwind CSS**: Para facilitar el proceso de estilar componentes.
 5. **Vite**: Empaquetador web.
+6. **Vercel**: Plataforma de hosting.
